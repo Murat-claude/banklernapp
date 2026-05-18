@@ -443,7 +443,7 @@
             const quizGrid = document.getElementById('quizLernfeldGrid');
             
             lernfelder.forEach(lf => {
-                const progress = Math.random() * 100;
+                const progress = 0; // STARTET BEI 0% - NICHT ZUFÄLLIG
                 const card = `
                     <div class="lernfeld-card">
                         <h3>${lf.title}</h3>
@@ -465,7 +465,7 @@
         function renderProgress() {
             const container = document.getElementById('progressContainer');
             lernfelder.forEach(lf => {
-                const progress = Math.random() * 100;
+                const progress = 0; // STARTET BEI 0%
                 container.innerHTML += `
                     <div class="progress-item">
                         <div class="progress-label"><span>${lf.title}</span><span>${Math.round(progress)}%</span></div>
@@ -543,8 +543,73 @@
             e.target.classList.add('active');
         }
 
+        const allQuizFragen = {
+            lf1: [
+                { q: 'Was ist das BGB?', optionen: ['Bundesgerichtliches Beamten-Gesetz', 'Bürgerliches Gesetzbuch', 'Bank-Geschäfts-Bestimmungen', 'Bundeskammer für Geldwäsche'], correct: 1, erk: 'Das BGB ist das Grundgesetz des deutschen Privatrechts.' },
+                { q: 'Unterschied Privatrecht und Öffentliches Recht?', optionen: ['Privatrecht = nur für reiche Menschen', 'Privatrecht regelt Beziehungen zwischen Personen, Öffentliches Recht regelt Staat-Bürger', 'Es gibt keinen Unterschied', 'Privatrecht ist älter'], correct: 1, erk: 'Privatrecht regelt Beziehungen zwischen Privatpersonen/Unternehmen. Öffentliches Recht regelt Beziehungen mit dem Staat.' },
+                { q: 'Was ist ein Kaufvertrag?', optionen: ['Ein Vertrag zum Kauf von Häusern', 'Eine Einigung über Kaufpreis und Ware', 'Ein Bankprodukt', 'Ein Versicherungsvertrag'], correct: 1, erk: 'Ein Kaufvertrag entsteht durch Angebot und Annahme zwischen Käufer und Verkäufer.' }
+            ],
+            lf2: [
+                { q: 'Was ist ein Einzelkonto?', optionen: ['Ein Konto für eine Person', 'Ein Konto für mehrere Personen', 'Ein Konto nur für Firmen', 'Ein spezielles Sparkonto'], correct: 0, erk: 'Einzelkonto = Girokonto für EINE Privatperson.' },
+                { q: 'Was bedeutet SEPA?', optionen: ['Single Euro Payments Area', 'Sicherheits-Europa-Payment', 'Sparkasse Electronic Payment', 'System Europäischer Privatkonten'], correct: 0, erk: 'SEPA = Single Euro Payments Area - der einheitliche Zahlungsraum in Europa.' },
+                { q: 'Was ist eine IBAN?', optionen: ['Internet Banking Account Number', 'International Bank Account Number', 'Internal Banking And Numeric', 'Integrated Bank Account Number'], correct: 1, erk: 'IBAN = International Bank Account Number - die internationale Bankkontonummer für SEPA-Zahlungen.' },
+                { q: 'Was ist eine Lastschrift?', optionen: ['Eine besondere Kreditkarte', 'Zahlungsart mit Einzugsermächtigung', 'Ein Bankgebühren-Modell', 'Eine Sicherheit für Kredite'], correct: 1, erk: 'Lastschrift = Bank zieht Geld vom Konto ab (mit schriftlicher Erlaubnis des Kunden).' },
+                { q: 'Was ist die SCHUFA?', optionen: ['Ein Bankverband', 'Eine Kreditauskunftei', 'Ein Kartenhersteller', 'Eine Versicherung'], correct: 1, erk: 'SCHUFA = Schutzgemeinschaft für allgemeine Kreditsicherung - Kreditauskunftei in Deutschland.' }
+            ],
+            lf3: [
+                { q: 'Was ist eine Prokura?', optionen: ['Eine Vollmacht für bestimmte Geschäfte', 'Eine Bevollmächtigung zur Unternehmensführung', 'Ein Bankprodukt', 'Eine Versicherungsart'], correct: 1, erk: 'Prokura = Bevollmächtigung zur Geschäftsführung mit großen Befugnissen.' },
+                { q: 'Welche Rechtsform hat die meisten Haftungsbeschränkungen?', optionen: ['Einzelunternehmen', 'OHG (Offene Handelsgesellschaft)', 'GmbH (Gesellschaft mit beschränkter Haftung)', 'AG (Aktiengesellschaft)'], correct: 2, erk: 'GmbH = Haftung auf Stammkapital begrenzt. Privatvermögen ist geschützt.' },
+                { q: 'Was ist Devisen?', optionen: ['Deutsche Zahlungsarten', 'Ausländische Währungen', 'Sparbriefe', 'Wertpapiere'], correct: 1, erk: 'Devisen = Zahlungsmittel in fremden Währungen (z.B. US-Dollar, Schweizer Franken).' }
+            ],
+            lf4: [
+                { q: 'Was ist Bausparen?', optionen: ['Eine normale Sparanlage', 'Sparen für Hausbau mit Darlehen und Staatshilfe', 'Ein Versicherungsprodukt', 'Ein Kreditprodukt'], correct: 1, erk: 'Bausparen = Kombination aus Sparphase + Darlehensphase mit staatlicher Förderung für Wohnzwecke.' },
+                { q: 'Was ist ein Festgeld?', optionen: ['Geld das man nicht abheben kann', 'Geld das für eine bestimmte Zeit zu festem Zinssatz angelegt wird', 'Ein Sicherheitssystem', 'Ein Bankgebühren-Modell'], correct: 1, erk: 'Festgeld = Geldanlage für feste Laufzeit (z.B. 6 Monate, 1 Jahr) mit vorher bekanntem Zinssatz.' },
+                { q: 'Was sind vermögenswirksame Leistungen?', optionen: ['Bankgebühren', 'Arbeitgeber-Zuschüsse für Sparanlagen', 'Versicherungs-Leistungen', 'Steuerersparnis'], correct: 1, erk: 'VL = Arbeitgeber zahlt zusätzlich zum Lohn Geld für Sparanlagen (mit Staatshilfe).' }
+            ],
+            lf5: [
+                { q: 'Was ist eine Bürgschaft?', optionen: ['Eine Versicherung', 'Eine Garantie einer dritten Person für einen Kredit', 'Ein Sicherheitspapier', 'Eine Bankgebühr'], correct: 1, erk: 'Bürgschaft = Kreditsicherheit. Ein Bürge haftet für Schulden des Kreditnehmers.' },
+                { q: 'Was ist ein Pfandrecht?', optionen: ['Das Recht, etwas zu besitzen', 'Das Recht, eine Sache zur Sicherung einer Forderung zu halten', 'Ein Versicherungsvertrag', 'Eine spezielle Kreditart'], correct: 1, erk: 'Pfandrecht = Bank darf Sache behalten/verkaufen wenn Kredit nicht bezahlt wird.' },
+                { q: 'Was ist Kreditscoring?', optionen: ['Eine Bewertung der Bankleistung', 'Ein System zur Bewertung des Kreditrisikos', 'Ein Spiel der Banken', 'Eine Versicherungsart'], correct: 1, erk: 'Kreditscoring = Maschine/Algorithmus bewertet automatisch wie riskant ein Kredite ist.' },
+                { q: 'Wann kann eine Bank einen Dispositionskredit kündigen?', optionen: ['Nie', 'Nach 10 Jahren', 'Jederzeit nach Ankündigung', 'Nur mit Gericht'], correct: 2, erk: 'Dispositionskredit kann jederzeit mit Frist gekündigt werden. Das ist im AGB festgelegt.' }
+            ]
+        };
+
         function startQuiz(lfId) {
-            alert(`🧪 Quiz zu ${lernfelder.find(x => x.id === lfId).title} gestartet!\n\nBeantworte die Fragen so ehrlich wie möglich!`);
+            const fragen = allQuizFragen[lfId];
+            if (!fragen) {
+                alert('Keine Fragen vorhanden');
+                return;
+            }
+
+            let fragenIndex = 0;
+            let richtig = 0;
+            
+            function showQuestion() {
+                if (fragenIndex >= fragen.length) {
+                    const prozent = Math.round((richtig / fragen.length) * 100);
+                    alert(`🎉 Quiz abgeschlossen!\n\nDu hast ${richtig} von ${fragen.length} richtig beantwortet!\n\nErgebnis: ${prozent}%\n\n${prozent >= 80 ? '🌟 Ausgezeichnet!' : prozent >= 60 ? '👍 Gut!' : '📚 Nochmal wiederholen!'}`);
+                    return;
+                }
+
+                const f = fragen[fragenIndex];
+                const optionen = f.optionen.map((o, i) => `${i + 1}. ${o}`).join('\n');
+                const antwort = prompt(`${fragenIndex + 1}/${fragen.length}\n\n${f.q}\n\n${optionen}\n\nWähle 1, 2, 3 oder 4:`);
+                
+                if (antwort === null) return;
+                
+                const selected = parseInt(antwort) - 1;
+                if (selected === f.correct) {
+                    alert(`✅ RICHTIG!\n\n${f.erk}`);
+                    richtig++;
+                } else {
+                    alert(`❌ Leider falsch!\n\nRichtige Antwort: ${f.optionen[f.correct]}\n\n${f.erk}`);
+                }
+                
+                fragenIndex++;
+                showQuestion();
+            }
+            
+            showQuestion();
         }
 
         function startFullTest() {
