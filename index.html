@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏦 Bank-Lernapp | Schularbeit Vorbereitung</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --danger: #d33b27;
+            --warning: #fbbc04;
+            --success: #34a853;
+            --light: #f8f9fa;
+            --dark: #202124;
+            --text: #202124;
+            --border: #dadce0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        body.dark-mode { background: #121212; color: #e8eaed; }
+        body.dark-mode .navbar, body.dark-mode .card, body.dark-mode .modal-content, 
+        body.dark-mode .sidebar, body.dark-mode .quiz-container {
+            background: #1e1e1e; color: #e8eaed;
+        }
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), #1765cc);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .navbar h1 { font-size: 1.5rem; font-weight: 700; }
+        .navbar-icons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .navbar-icons button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .navbar-icons button:hover { background: rgba(255,255,255,0.3); }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .countdown-banner {
+            background: linear-gradient(135deg, var(--danger), #c5221f);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(211, 59, 39, 0.3);
+        }
+        .countdown-banner h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .countdown-time {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-card h3 { color: #5f6368; font-size: 0.9rem; margin-bottom: 0.8rem; text-transform: uppercase; }
+        .stat-card .number { font-size: 2.5rem; font-weight: 700; color: var(--primary); }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+        .card h2 { color: var(--primary); margin-bottom: 1.5rem; font-size: 1.5rem; }
+        .card h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; }
+        .progress-item { margin-bottom: 2rem; }
+        .progress-label { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.95rem; }
+        .progress-bar {
+            width: 100%;
+            height: 24px;
+            background: #e8eaed;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.5rem;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+        .tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #5f6368;
+            position: relative;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .tab.active { color: var(--primary); }
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+        }
+        .content-section { display: none; animation: fadeIn 0.3s ease; }
+        .content-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .lernfeld-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .lernfeld-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 5px solid var(--primary);
+        }
+        .lernfeld-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+        .lernfeld-card h3 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .lernfeld-card p { color: #5f6368; font-size: 0.9rem; margin-bottom: 1rem; }
+        .quiz-option {
+            background: #f8f9fa;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #e8f0fe; }
+        .quiz-option input[type="radio"] { cursor: pointer; width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0; }
+        .sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 80px;
+        }
+        .sidebar h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1rem; border-bottom: 2px solid var(--border); padding-bottom: 0.8rem; }
+        .sidebar-item {
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.5rem;
+            background: var(--light);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-item:hover { background: #e8f0fe; color: var(--primary); border-left-color: var(--primary); }
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: #1765cc; }
+        .btn-block { width: 100%; margin-top: 1rem; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid;
+        }
+        .alert.info { background: #e8f0fe; border-left-color: var(--primary); color: #1a73e8; }
+        .checklist { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .checklist-item { display: flex; align-items: center; padding: 1rem; border-bottom: 1px solid var(--border); gap: 1rem; }
+        .checklist-item input[type="checkbox"] { width: 22px; height: 22px; cursor: pointer; flex-shrink: 0; }
+        .checklist-item label { flex: 1; cursor: pointer; margin: 0; }
+        .main-grid { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; margin-bottom: 2rem; }
+        @media (max-width: 1024px) { .main-grid { grid-template-columns: 1fr; } .sidebar { position: static; } }
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem; }
+            .container { padding: 1rem; }
+            .countdown-time { font-size: 2rem; }
+            .lernfeld-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>🏦 Bank-Lernapp</h1>
+        <div class="navbar-icons">
+            <button id="darkModeBtn">🌙 Dunkel</button>
+            <button id="loginBtn">👤 Login</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="countdown-banner">
+            <h2>⏰ Schularbeit FREITAG!</h2>
+            <div class="countdown-time" id="countdown">3 Tage verbleibend</div>
+            <p>Du schaffst das! Intensives Lernen: Dienstag, Mittwoch, Donnerstag</p>
+        </div>
+
+        <div class="alert info">
+            <strong>💡 Lernstrategie:</strong> Täglich 3 Stunden intensiv! Dienstag & Mittwoch: Grundlagen lernen. Donnerstag: Tests & Wiederholung.
+        </div>
+
+        <div class="dashboard">
+            <div class="stat-card">
+                <h3>Gesamtfortschritt</h3>
+                <div class="number" id="totalProgress">0<span style="font-size: 1.5rem;">%</span></div>
+            </div>
+            <div class="stat-card">
+                <h3>Gelernte Themen</h3>
+                <div class="number" id="learnedTopics">0<span style="font-size: 1.5rem;">/120+</span></div>
+            </div>
+            <div class="stat-card">
+                <h3>Quiz Erfolg</h3>
+                <div class="number" id="quizAverage">-<span style="font-size: 1.5rem;">%</span></div>
+            </div>
+            <div class="stat-card">
+                <h3>Lernstunden</h3>
+                <div class="number" id="learningHours">0<span style="font-size: 1.5rem;">h</span></div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div>
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab(event, 'learn')">📚 Lernen</button>
+                    <button class="tab" onclick="switchTab(event, 'quiz')">🧪 Quiz</button>
+                    <button class="tab" onclick="switchTab(event, 'test')">🏆 Tests</button>
+                    <button class="tab" onclick="switchTab(event, 'glossar')">📖 Glossar</button>
+                    <button class="tab" onclick="switchTab(event, 'checkliste')">✅ Plan</button>
+                </div>
+
+                <div id="learn" class="content-section active">
+                    <div class="card">
+                        <h2>Lernfelder</h2>
+                        <div class="lernfeld-grid" id="lernfeldGrid"></div>
+                    </div>
+                    <div class="card">
+                        <h2>Dein Fortschritt</h2>
+                        <div id="progressContainer"></div>
+                    </div>
+                </div>
+
+                <div id="quiz" class="content-section">
+                    <div class="card">
+                        <h2>Quiz Trainer</h2>
+                        <div class="lernfeld-grid" id="quizLernfeldGrid"></div>
+                    </div>
+                </div>
+
+                <div id="test" class="content-section">
+                    <div class="card">
+                        <h2>Prüfungs-Simulationen</h2>
+                        <button class="btn btn-primary btn-block" onclick="startFullTest()">🏆 Volltest (90 Min)</button>
+                        <button class="btn btn-primary btn-block" onclick="startMiniTest()">⚡ Mini-Test (15 Min)</button>
+                    </div>
+                </div>
+
+                <div id="glossar" class="content-section">
+                    <div class="card">
+                        <h2>Bank-Fachbegriffe</h2>
+                        <input type="text" id="glossarSearch" placeholder="Suchbegriff..." style="width: 100%; padding: 1rem; border: 2px solid var(--border); border-radius: 6px; margin-bottom: 1rem;">
+                        <div id="glossarContent"></div>
+                    </div>
+                </div>
+
+                <div id="checkliste" class="content-section">
+                    <div class="checklist">
+                        <h2 style="color: var(--primary); margin-bottom: 1.5rem;">📋 Dein Lernplan</h2>
+                        <h3 style="margin-top: 1.5rem;">DIENSTAG</h3>
+                        <div id="checklistDienstag"></div>
+                        <h3 style="margin-top: 1.5rem;">MITTWOCH</h3>
+                        <div id="checklistMittwoch"></div>
+                        <h3 style="margin-top: 1.5rem;">DONNERSTAG</h3>
+                        <div id="checklistDonnerstag"></div>
+                        <h3 style="margin-top: 1.5rem;">FREITAG</h3>
+                        <div id="checklistFreitag"></div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="sidebar">
+                <h3>⚡ Heute</h3>
+                <div id="todayLessons"></div>
+                <h3 style="margin-top: 2rem;">💡 Tipps</h3>
+                <div id="tips"></div>
+                <h3 style="margin-top: 2rem;">🎯 Fortschritt</h3>
+                <div id="stats" style="background: var(--light); padding: 1rem; border-radius: 6px; font-size: 0.9rem;"></div>
+            </aside>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: var(--primary); margin-bottom: 1rem;">Login</h2>
+            <input type="email" id="email" placeholder="E-Mail" style="width: 100%; padding: 0.8rem; border: 2px solid var(--border); border-radius: 6px; margin-bottom: 1rem;">
+            <input type="password" id="password" placeholder="Passwort" style="width: 100%; padding: 0.8rem; border: 2px solid var(--border); border-radius: 6px; margin-bottom: 1rem;">
+            <button class="btn btn-primary btn-block" onclick="login()">Anmelden</button>
+            <button class="btn btn-block" style="background: #f0f0f0; color: black; margin-top: 0.5rem;" onclick="closeModal('loginModal')">Abbrechen</button>
+        </div>
+    </div>
+
+    <script>
+        const lernfelder = [
+            { id: 'lf1', title: 'LF 1: Eigene Rolle', subtitle: 'Rechtliche Grundlagen', topics: ['BGB', 'Verträge', 'Verbraucherschutz'] },
+            { id: 'lf2', title: 'LF 2: Privatkunden', subtitle: 'Kontoführung & Zahlungsverkehr', topics: ['Kontoarten', 'SEPA', 'Zahlungskarten', 'Geldwäsche'] },
+            { id: 'lf3', title: 'LF 3: Geschäftskunden', subtitle: 'Firmenkunden & Zahlungsverkehr', topics: ['Handelsrecht', 'Rechtsformen', 'Devisen'] },
+            { id: 'lf4', title: 'LF 4: Anlagen', subtitle: 'Sparen & Vermögensbildung', topics: ['Sparkonten', 'Bausparen', 'Festgelder'] },
+            { id: 'lf5', title: 'LF 5: Kredite', subtitle: 'Verbraucherdarlehen & Sicherheiten', topics: ['Kreditgewährung', 'Sicherheiten', 'Bürgschaft', 'Pfandrecht'] }
+        ];
+
+        const glossar = {
+            'IBAN': 'International Bank Account Number - Bankkontonummer für SEPA',
+            'SEPA': 'Single Euro Payments Area - Zahlungsraum Europa',
+            'BGB': 'Bürgerliches Gesetzbuch - Deutsches Privatrecht',
+            'P-Konto': 'Pfändungsschutz-Konto',
+            'TAN': 'Transaktionsnummer - Sicherheit Online-Banking',
+            'SCHUFA': 'Kreditauskunftei Deutschland',
+            'Prokura': 'Bevollmächtigung zur Geschäftsführung',
+            'Lastschrift': 'Zahlungsart mit Einzugsermächtigung',
+            'Bürgschaft': 'Kreditsicherheit durch dritte Person',
+            'Pfandrecht': 'Sicherungsrecht an Sachen/Forderungen',
+            'Bausparen': 'Sparen + Darlehen für Wohnzwecke',
+            'Kreditscoring': 'Risikobewertungssystem für Kredite'
+        };
+
+        const checkliste = {
+            dienstag: ['LF 1: Rechtliches lernen', 'LF 2 Anfang: Kontoführung', 'Quiz zu LF1+LF2', 'Merksätze wiederholen'],
+            mittwoch: ['LF 2: Zahlungsverkehr', 'LF 3: Geschäftskunden', 'LF 4: Anlagen', 'Tests machen'],
+            donnerstag: ['LF 5: Kredite & Sicherheiten', 'Schwache Punkte üben', 'Volltest simulieren', 'Formeln wiederholen'],
+            freitag: ['Leichte Wiederholung (30 Min)', 'Gutes Frühstück', 'Zur Prüfung gehen', '🏆 BESTEHEN!']
+        };
+
+        const tips = [
+            '📌 Schreib aktiv Notizen!',
+            '⏰ Jede Stunde eine Pause',
+            '🎯 Fokus auf HIGH-Priority Themen',
+            '❓ Mache Tests nach jedem Thema',
+            '💪 Du schaffst das!'
+        ];
+
+        function init() {
+            renderLernfelder();
+            renderProgress();
+            renderGlossar();
+            renderCheckliste();
+            renderTodayLessons();
+            renderTips();
+            startCountdown();
+        }
+
+        function renderLernfelder() {
+            const grid = document.getElementById('lernfeldGrid');
+            const quizGrid = document.getElementById('quizLernfeldGrid');
+            
+            lernfelder.forEach(lf => {
+                const progress = Math.random() * 100;
+                const card = `
+                    <div class="lernfeld-card">
+                        <h3>${lf.title}</h3>
+                        <p>${lf.subtitle}</p>
+                        <div style="margin-top: 1rem;">
+                            <div style="font-size: 0.85rem; color: #5f6368; margin-bottom: 0.5rem;">Fortschritt: ${Math.round(progress)}%</div>
+                            <div class="progress-bar" style="height: 8px;">
+                                <div class="progress-fill" style="width: ${progress}%; padding: 0;"></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-block" style="margin-top: 1rem;" onclick="startQuiz('${lf.id}')">Lernen →</button>
+                    </div>
+                `;
+                grid.innerHTML += card;
+                quizGrid.innerHTML += card.replace('Lernen →', '🧪 Quiz');
+            });
+        }
+
+        function renderProgress() {
+            const container = document.getElementById('progressContainer');
+            lernfelder.forEach(lf => {
+                const progress = Math.random() * 100;
+                container.innerHTML += `
+                    <div class="progress-item">
+                        <div class="progress-label"><span>${lf.title}</span><span>${Math.round(progress)}%</span></div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progress}%">${Math.round(progress)}%</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderGlossar() {
+            const container = document.getElementById('glossarContent');
+            Object.entries(glossar).forEach(([term, definition]) => {
+                container.innerHTML += `
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; border-left: 3px solid var(--primary);">
+                        <strong style="color: var(--primary);">${term}</strong>
+                        <p style="margin-top: 0.5rem; color: #5f6368; font-size: 0.9rem;">${definition}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function renderCheckliste() {
+            Object.entries(checkliste).forEach(([day, items]) => {
+                const container = document.getElementById(`checklist${day.charAt(0).toUpperCase() + day.slice(1)}`);
+                items.forEach((item, idx) => {
+                    container.innerHTML += `
+                        <div class="checklist-item">
+                            <input type="checkbox" id="${day}-${idx}">
+                            <label for="${day}-${idx}">${item}</label>
+                        </div>
+                    `;
+                });
+            });
+        }
+
+        function renderTodayLessons() {
+            const container = document.getElementById('todayLessons');
+            lernfelder.slice(0, 2).forEach(lf => {
+                container.innerHTML += `<div class="sidebar-item" onclick="startQuiz('${lf.id}')">${lf.title} →</div>`;
+            });
+        }
+
+        function renderTips() {
+            const container = document.getElementById('tips');
+            tips.forEach(tip => {
+                container.innerHTML += `<div class="sidebar-item">${tip}</div>`;
+            });
+        }
+
+        function startCountdown() {
+            function update() {
+                const friday = new Date();
+                friday.setDate(friday.getDate() + (5 - friday.getDay() || -2));
+                friday.setHours(9, 0, 0);
+                
+                const now = new Date();
+                const diff = friday - now;
+                
+                if (diff > 0) {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    document.getElementById('countdown').textContent = `${days} Tage, ${hours} Stunden`;
+                }
+            }
+            update();
+            setInterval(update, 60000);
+        }
+
+        function switchTab(e, tab) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            e.target.classList.add('active');
+        }
+
+        function startQuiz(lfId) {
+            alert(`🧪 Quiz zu ${lernfelder.find(x => x.id === lfId).title} gestartet!\n\nBeantworte die Fragen so ehrlich wie möglich!`);
+        }
+
+        function startFullTest() {
+            alert('🏆 VOLLTEST gestartet!\n\n⏱️ 90 Minuten Zeit\n📖 Alle 5 Lernfelder\n\nBleib konzentriert!');
+        }
+
+        function startMiniTest() {
+            alert('⚡ MINI-TEST gestartet!\n\n⏱️ 15 Minuten\n📖 Schneller Check\n\nAufwärmen vor dem Volltest!');
+        }
+
+        document.getElementById('darkModeBtn').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            document.getElementById('loginModal').classList.add('active');
+        });
+
+        function login() {
+            const email = document.getElementById('email').value;
+            if (!email) { alert('E-Mail eingeben!'); return; }
+            localStorage.setItem('userEmail', email);
+            alert('✅ Anmeldung erfolgreich!');
+            closeModal('loginModal');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        document.getElementById('glossarSearch')?.addEventListener('input', (e) => {
+            const search = e.target.value.toLowerCase();
+            document.querySelectorAll('#glossarContent > div').forEach(item => {
+                item.style.display = item.textContent.toLowerCase().includes(search) ? 'block' : 'none';
+            });
+        });
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
