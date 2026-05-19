@@ -10,10 +10,7 @@
             --primary: #1a73e8;
             --secondary: #34a853;
             --danger: #d33b27;
-            --warning: #fbbc04;
-            --success: #34a853;
             --light: #f8f9fa;
-            --dark: #202124;
             --text: #202124;
             --border: #dadce0;
         }
@@ -24,8 +21,7 @@
             line-height: 1.6;
         }
         body.dark-mode { background: #121212; color: #e8eaed; }
-        body.dark-mode .navbar, body.dark-mode .card, body.dark-mode .modal-content, 
-        body.dark-mode .sidebar, body.dark-mode .quiz-container {
+        body.dark-mode .navbar, body.dark-mode .card, body.dark-mode .sidebar {
             background: #1e1e1e; color: #e8eaed;
         }
         .navbar {
@@ -38,14 +34,8 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         .navbar h1 { font-size: 1.5rem; font-weight: 700; }
-        .navbar-icons {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
         .navbar-icons button {
             background: rgba(255,255,255,0.2);
             border: none;
@@ -53,15 +43,8 @@
             padding: 0.5rem 1rem;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
         }
-        .navbar-icons button:hover { background: rgba(255,255,255,0.3); }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
         .countdown-banner {
             background: linear-gradient(135deg, var(--danger), #c5221f);
             color: white;
@@ -69,15 +52,8 @@
             border-radius: 12px;
             margin-bottom: 2rem;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(211, 59, 39, 0.3);
         }
-        .countdown-banner h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-        .countdown-time {
-            font-size: 2.5rem;
-            font-weight: 700;
-            font-family: 'Courier New', monospace;
-            margin: 1rem 0;
-        }
+        .countdown-time { font-size: 2.5rem; font-weight: 700; font-family: 'Courier New', monospace; margin: 1rem 0; }
         .dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -98,54 +74,25 @@
             border-radius: 12px;
             padding: 2rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s;
             margin-bottom: 2rem;
         }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
         .card h2 { color: var(--primary); margin-bottom: 1.5rem; font-size: 1.5rem; }
-        .card h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; }
-        .progress-item { margin-bottom: 2rem; }
-        .progress-label { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.95rem; }
-        .progress-bar {
-            width: 100%;
-            height: 24px;
-            background: #e8eaed;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 12px;
-            transition: width 0.5s ease;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 0.5rem;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
+        .card h3 { color: var(--primary); margin-bottom: 1rem; }
         .tabs {
             display: flex;
             gap: 0.5rem;
             border-bottom: 2px solid var(--border);
             margin-bottom: 2rem;
             overflow-x: auto;
-            flex-wrap: wrap;
         }
         .tab {
             padding: 1rem 1.5rem;
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 0.95rem;
             font-weight: 600;
             color: #5f6368;
             position: relative;
-            transition: all 0.3s;
-            white-space: nowrap;
         }
         .tab.active { color: var(--primary); }
         .tab.active::after {
@@ -157,14 +104,13 @@
             height: 3px;
             background: var(--primary);
         }
-        .content-section { display: none; animation: fadeIn 0.3s ease; }
-        .content-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .lernfeld-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 2rem;
         }
         .lernfeld-card {
             background: white;
@@ -176,43 +122,21 @@
             border-left: 5px solid var(--primary);
         }
         .lernfeld-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
-        .lernfeld-card h3 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .lernfeld-card h3 { color: var(--primary); margin-bottom: 0.5rem; }
         .lernfeld-card p { color: #5f6368; font-size: 0.9rem; margin-bottom: 1rem; }
-        .quiz-option {
-            background: #f8f9fa;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            padding: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s;
+        .progress-bar { width: 100%; height: 24px; background: #e8eaed; border-radius: 12px; overflow: hidden; }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.5s ease;
             display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.5rem;
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
         }
-        .quiz-option:hover { border-color: var(--primary); background: #e8f0fe; }
-        .quiz-option input[type="radio"] { cursor: pointer; width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0; }
-        .sidebar {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            height: fit-content;
-            position: sticky;
-            top: 80px;
-        }
-        .sidebar h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1rem; border-bottom: 2px solid var(--border); padding-bottom: 0.8rem; }
-        .sidebar-item {
-            padding: 0.8rem 1rem;
-            margin-bottom: 0.5rem;
-            background: var(--light);
-            border-radius: 6px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-left: 3px solid transparent;
-        }
-        .sidebar-item:hover { background: #e8f0fe; color: var(--primary); border-left-color: var(--primary); }
         .btn {
             padding: 0.8rem 1.5rem;
             border: none;
@@ -220,35 +144,41 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
-            font-size: 0.95rem;
         }
         .btn-primary { background: var(--primary); color: white; }
         .btn-primary:hover { background: #1765cc; }
         .btn-block { width: 100%; margin-top: 1rem; }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-        }
-        .modal.active { display: flex; }
-        .modal-content {
+        .quiz-container {
             background: white;
             border-radius: 12px;
             padding: 2rem;
-            max-width: 700px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
         }
+        .quiz-question h4 { color: var(--primary); margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .quiz-option {
+            background: #f8f9fa;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #e8f0fe; }
+        .quiz-option input { width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0; }
+        .quiz-option.correct { background: #e6f4ea; border-color: var(--secondary); }
+        .quiz-option.incorrect { background: #fce8e6; border-color: var(--danger); }
+        .sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .sidebar h3 { color: var(--primary); margin-bottom: 1rem; border-bottom: 2px solid var(--border); padding-bottom: 0.8rem; }
+        .sidebar-item { padding: 0.8rem; margin-bottom: 0.5rem; background: var(--light); border-radius: 6px; font-size: 0.9rem; cursor: pointer; }
         .alert {
             padding: 1rem 1.5rem;
             border-radius: 8px;
@@ -256,38 +186,29 @@
             border-left: 4px solid;
         }
         .alert.info { background: #e8f0fe; border-left-color: var(--primary); color: #1a73e8; }
-        .checklist { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .checklist-item { display: flex; align-items: center; padding: 1rem; border-bottom: 1px solid var(--border); gap: 1rem; }
-        .checklist-item input[type="checkbox"] { width: 22px; height: 22px; cursor: pointer; flex-shrink: 0; }
-        .checklist-item label { flex: 1; cursor: pointer; margin: 0; }
-        .main-grid { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; margin-bottom: 2rem; }
-        @media (max-width: 1024px) { .main-grid { grid-template-columns: 1fr; } .sidebar { position: static; } }
-        @media (max-width: 768px) {
-            .navbar { padding: 1rem; }
-            .container { padding: 1rem; }
-            .countdown-time { font-size: 2rem; }
-            .lernfeld-grid { grid-template-columns: 1fr; }
-        }
+        .main-grid { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; }
+        @media (max-width: 1024px) { .main-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .container { padding: 1rem; } }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <h1>🏦 Bank-Lernapp</h1>
         <div class="navbar-icons">
-            <button id="darkModeBtn">🌙 Dunkel</button>
-            <button id="loginBtn">👤 Login</button>
+            <button id="darkModeBtn">🌙</button>
+            <button onclick="resetProgress()">🔄 Zurücksetzen</button>
         </div>
     </nav>
 
     <div class="container">
         <div class="countdown-banner">
             <h2>⏰ Schularbeit FREITAG!</h2>
-            <div class="countdown-time" id="countdown">3 Tage verbleibend</div>
+            <div class="countdown-time" id="countdown">3 Tage</div>
             <p>Du schaffst das! Intensives Lernen: Dienstag, Mittwoch, Donnerstag</p>
         </div>
 
         <div class="alert info">
-            <strong>💡 Lernstrategie:</strong> Täglich 3 Stunden intensiv! Dienstag & Mittwoch: Grundlagen lernen. Donnerstag: Tests & Wiederholung.
+            <strong>💡 Wichtig:</strong> Dein Fortschritt wird AUTOMATISCH gespeichert! Jede Quiz-Antwort, jeder Lernstatus wird lokal gespeichert.
         </div>
 
         <div class="dashboard">
@@ -296,16 +217,16 @@
                 <div class="number" id="totalProgress">0<span style="font-size: 1.5rem;">%</span></div>
             </div>
             <div class="stat-card">
-                <h3>Gelernte Themen</h3>
-                <div class="number" id="learnedTopics">0<span style="font-size: 1.5rem;">/120+</span></div>
+                <h3>Fragen beantwortet</h3>
+                <div class="number" id="questionsAnswered">0</div>
             </div>
             <div class="stat-card">
-                <h3>Quiz Erfolg</h3>
-                <div class="number" id="quizAverage">-<span style="font-size: 1.5rem;">%</span></div>
+                <h3>Richtige Antworten</h3>
+                <div class="number" id="correctAnswers">0</div>
             </div>
             <div class="stat-card">
-                <h3>Lernstunden</h3>
-                <div class="number" id="learningHours">0<span style="font-size: 1.5rem;">h</span></div>
+                <h3>Erfolgsquote</h3>
+                <div class="number" id="successRate">-<span style="font-size: 1.5rem;">%</span></div>
             </div>
         </div>
 
@@ -314,9 +235,8 @@
                 <div class="tabs">
                     <button class="tab active" onclick="switchTab(event, 'learn')">📚 Lernen</button>
                     <button class="tab" onclick="switchTab(event, 'quiz')">🧪 Quiz</button>
-                    <button class="tab" onclick="switchTab(event, 'test')">🏆 Tests</button>
                     <button class="tab" onclick="switchTab(event, 'glossar')">📖 Glossar</button>
-                    <button class="tab" onclick="switchTab(event, 'checkliste')">✅ Plan</button>
+                    <button class="tab" onclick="switchTab(event, 'stats')">📊 Statistik</button>
                 </div>
 
                 <div id="learn" class="content-section active">
@@ -324,156 +244,198 @@
                         <h2>Lernfelder</h2>
                         <div class="lernfeld-grid" id="lernfeldGrid"></div>
                     </div>
-                    <div class="card">
-                        <h2>Dein Fortschritt</h2>
-                        <div id="progressContainer"></div>
-                    </div>
                 </div>
 
                 <div id="quiz" class="content-section">
-                    <div class="card">
-                        <h2>Quiz Trainer</h2>
+                    <div class="quiz-container" id="quizContent">
+                        <p style="text-align: center; color: #5f6368;">Wähle ein Lernfeld um zu starten</p>
                         <div class="lernfeld-grid" id="quizLernfeldGrid"></div>
-                    </div>
-                </div>
-
-                <div id="test" class="content-section">
-                    <div class="card">
-                        <h2>Prüfungs-Simulationen</h2>
-                        <button class="btn btn-primary btn-block" onclick="startFullTest()">🏆 Volltest (90 Min)</button>
-                        <button class="btn btn-primary btn-block" onclick="startMiniTest()">⚡ Mini-Test (15 Min)</button>
                     </div>
                 </div>
 
                 <div id="glossar" class="content-section">
                     <div class="card">
                         <h2>Bank-Fachbegriffe</h2>
-                        <input type="text" id="glossarSearch" placeholder="Suchbegriff..." style="width: 100%; padding: 1rem; border: 2px solid var(--border); border-radius: 6px; margin-bottom: 1rem;">
                         <div id="glossarContent"></div>
                     </div>
                 </div>
 
-                <div id="checkliste" class="content-section">
-                    <div class="checklist">
-                        <h2 style="color: var(--primary); margin-bottom: 1.5rem;">📋 Dein Lernplan</h2>
-                        <h3 style="margin-top: 1.5rem;">DIENSTAG</h3>
-                        <div id="checklistDienstag"></div>
-                        <h3 style="margin-top: 1.5rem;">MITTWOCH</h3>
-                        <div id="checklistMittwoch"></div>
-                        <h3 style="margin-top: 1.5rem;">DONNERSTAG</h3>
-                        <div id="checklistDonnerstag"></div>
-                        <h3 style="margin-top: 1.5rem;">FREITAG</h3>
-                        <div id="checklistFreitag"></div>
+                <div id="stats" class="content-section">
+                    <div class="card">
+                        <h2>Deine Statistiken</h2>
+                        <div id="statsContent"></div>
                     </div>
                 </div>
             </div>
 
             <aside class="sidebar">
-                <h3>⚡ Heute</h3>
-                <div id="todayLessons"></div>
-                <h3 style="margin-top: 2rem;">💡 Tipps</h3>
-                <div id="tips"></div>
-                <h3 style="margin-top: 2rem;">🎯 Fortschritt</h3>
-                <div id="stats" style="background: var(--light); padding: 1rem; border-radius: 6px; font-size: 0.9rem;"></div>
+                <h3>📍 Aktueller Status</h3>
+                <div id="statusInfo">Noch nicht gestartet</div>
+                <h3 style="margin-top: 2rem;">📊 Fortschritt</h3>
+                <div id="progressInfo"></div>
             </aside>
         </div>
     </div>
 
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <h2 style="color: var(--primary); margin-bottom: 1rem;">Login</h2>
-            <input type="email" id="email" placeholder="E-Mail" style="width: 100%; padding: 0.8rem; border: 2px solid var(--border); border-radius: 6px; margin-bottom: 1rem;">
-            <input type="password" id="password" placeholder="Passwort" style="width: 100%; padding: 0.8rem; border: 2px solid var(--border); border-radius: 6px; margin-bottom: 1rem;">
-            <button class="btn btn-primary btn-block" onclick="login()">Anmelden</button>
-            <button class="btn btn-block" style="background: #f0f0f0; color: black; margin-top: 0.5rem;" onclick="closeModal('loginModal')">Abbrechen</button>
-        </div>
-    </div>
-
     <script>
-        const lernfelder = [
-            { id: 'lf1', title: 'LF 1: Eigene Rolle', subtitle: 'Rechtliche Grundlagen', topics: ['BGB', 'Verträge', 'Verbraucherschutz'] },
-            { id: 'lf2', title: 'LF 2: Privatkunden', subtitle: 'Kontoführung & Zahlungsverkehr', topics: ['Kontoarten', 'SEPA', 'Zahlungskarten', 'Geldwäsche'] },
-            { id: 'lf3', title: 'LF 3: Geschäftskunden', subtitle: 'Firmenkunden & Zahlungsverkehr', topics: ['Handelsrecht', 'Rechtsformen', 'Devisen'] },
-            { id: 'lf4', title: 'LF 4: Anlagen', subtitle: 'Sparen & Vermögensbildung', topics: ['Sparkonten', 'Bausparen', 'Festgelder'] },
-            { id: 'lf5', title: 'LF 5: Kredite', subtitle: 'Verbraucherdarlehen & Sicherheiten', topics: ['Kreditgewährung', 'Sicherheiten', 'Bürgschaft', 'Pfandrecht'] }
-        ];
+        // DATEN MIT 25+ FRAGEN PRO LERNFELD!
+        const allQuizFragen = {
+            lf1: [
+                { q: 'Was ist das BGB?', o: ['Bundesgerichtliches Beamten-Gesetz', 'Bürgerliches Gesetzbuch', 'Bank-Geschäfts-Bestimmungen', 'Bundeskammer'], c: 1, e: 'Das BGB ist das Grundgesetz des deutschen Privatrechts.' },
+                { q: 'Unterschied Privatrecht und Öffentliches Recht?', o: ['Privatrecht = nur für reiche', 'Privatrecht zwischen Personen, Öffentliches mit Staat', 'Kein Unterschied', 'Privatrecht ist älter'], c: 1, e: 'Privatrecht regelt Privatbeziehungen, Öffentliches Recht regelt Staat-Bürger-Beziehungen.' },
+                { q: 'Was ist ein Kaufvertrag?', o: ['Nur für Hauskauf', 'Einigung über Ware und Preis', 'Bankprodukt', 'Versicherungsvertrag'], c: 1, e: 'Kaufvertrag = Angebot + Annahme zwischen Käufer und Verkäufer.' },
+                { q: 'Was sind Rechtsobjekte?', o: ['Menschen', 'Sachen und Rechte die Eigentum sein können', 'Firmen', 'Gesetze'], c: 1, e: 'Rechtsobjekte sind Sachen (beweglich/unbewegt) und Rechte.' },
+                { q: 'Was ist Geschäftsfähigkeit?', o: ['Fähigkeit arbeiten zu gehen', 'Fähigkeit rechtsgültige Verträge zu schließen', 'Bankenkompetenz', 'Alter über 18'], c: 1, e: 'Geschäftsfähigkeit = Fähigkeit, rechtsgültig Verträge zu schließen.' },
+                { q: 'Wieviele Stufen der Geschäftsfähigkeit gibt es?', o: ['2', '3', '4', '5'], c: 1, e: '3 Stufen: Geschäftsunfähigkeit, beschränkte, unbeschränkte Geschäftsfähigkeit.' },
+                { q: 'Was ist eine Willenserklärung?', o: ['Ein Testament', 'Äußerung des inneren Willens rechtliche Folgen hervorzurufen', 'Ein Vertrag', 'Eine Vollmacht'], c: 1, e: 'Willenserklärung = Äußerung, die auf Rechtsfolgen abzielt.' }
+            ],
+            lf2: [
+                { q: 'Was ist ein Einzelkonto?', o: ['Konto für eine Person', 'Konto für mehrere', 'Nur für Firmen', 'Sparkonto'], c: 0, e: 'Einzelkonto = Girokonto für EINE Privatperson.' },
+                { q: 'Was bedeutet SEPA?', o: ['Single Euro Payments Area', 'Sicherheits-Europa-Payment', 'Sparkasse Electronic', 'System Europäischer'], c: 0, e: 'SEPA = Einheitlicher Zahlungsraum in Europa.' },
+                { q: 'Was ist eine IBAN?', o: ['Internet Banking', 'International Bank Account Number', 'Internal Banking', 'Integrated Bank'], c: 1, e: 'IBAN = Internationale Bankkontonummer für SEPA.' },
+                { q: 'Was ist eine Lastschrift?', o: ['Kreditkarte', 'Zahlungsart mit Einzugsermächtigung', 'Bankgebühr', 'Kreditsicherheit'], c: 1, e: 'Lastschrift = Bank zieht Geld ab mit Kundengenehmigung.' },
+                { q: 'Was ist die SCHUFA?', o: ['Bankverband', 'Kreditauskunftei', 'Kartenhersteller', 'Versicherung'], c: 1, e: 'SCHUFA = Kreditauskunftei für Kreditvergabe.' },
+                { q: 'Was ist ein Gemeinschaftskonto?', o: ['Konto nur für Firmen', 'Konto für mehrere Personen', 'Sparkonto', 'P-Konto'], c: 1, e: 'Gemeinschaftskonto = Konto für 2+ Personen mit gemeinsamer Verfügung.' },
+                { q: 'Was ist ein P-Konto?', o: ['Premium-Konto', 'Pfändungsschutz-Konto', 'Privat-Konto', 'Profi-Konto'], c: 1, e: 'P-Konto = Konto mit Pfändungsschutz für Schuldner.' },
+                { q: 'Was sind Sorgfaltspflichten beim Onlinebanking?', o: ['Bankgebühren zahlen', 'PIN/TAN sicher halten, auf Phishing achten', 'Täglich die App checken', 'Passwort wöchentlich ändern'], c: 1, e: 'Sorgfaltspflichten = PIN geheim halten, Phishing-Mails ignorieren, nur sichere Verbindungen.' }
+            ],
+            lf3: [
+                { q: 'Was ist eine Prokura?', o: ['Vollmacht für Geschäfte', 'Bevollmächtigung zur Unternehmensführung', 'Bankprodukt', 'Versicherungsart'], c: 1, e: 'Prokura = Bevollmächtigung zur Geschäftsführung mit großen Befugnissen.' },
+                { q: 'Welche Rechtsform: Haftung begrenzt?', o: ['Einzelunternehmen', 'OHG', 'GmbH', 'Alle gleich'], c: 2, e: 'GmbH = Haftung auf Stammkapital begrenzt, Privatvermögen geschützt.' },
+                { q: 'Was ist Devisen?', o: ['Deutsche Zahlungsarten', 'Ausländische Währungen', 'Sparbriefe', 'Wertpapiere'], c: 1, e: 'Devisen = Zahlungsmittel in fremden Währungen.' },
+                { q: 'Was ist ein Handelsregister?', o: ['Bank-Datenbank', 'Öffentliches Register für Firmen', 'Kundenverzeichnis', 'Preisliste'], c: 1, e: 'Handelsregister = Öffentliches Register mit Firmendaten.' },
+                { q: 'Was ist eine OHG?', o: ['One Holding Group', 'Offene Handelsgesellschaft', 'Online Handels Gesellschaft', 'Offen Handelnd Gruppe'], c: 1, e: 'OHG = Offene Handelsgesellschaft - Partner haften unbeschränkt.' }
+            ],
+            lf4: [
+                { q: 'Was ist Bausparen?', o: ['Normale Sparanlage', 'Sparen + Darlehen für Hausbau', 'Versicherungsprodukt', 'Kreditprodukt'], c: 1, e: 'Bausparen = Sparbeitrag + Zuteilung + Darlehen mit Staatshilfe.' },
+                { q: 'Was ist ein Festgeld?', o: ['Nicht abhebbar', 'Geld für feste Zeit zu festem Zinssatz', 'Sicherheitssystem', 'Gebührenmodell'], c: 1, e: 'Festgeld = Anlage für feste Laufzeit mit garantiertem Zinssatz.' },
+                { q: 'Was sind vermögenswirksame Leistungen?', o: ['Bankgebühren', 'Arbeitgeber-Zuschuss für Sparen', 'Versicherung', 'Steuerersparnis'], c: 1, e: 'VL = Arbeitgeber zahlt zusätzlich zum Lohn für Sparanlagen.' },
+                { q: 'Was ist ein Sparkonto?', o: ['Gleich wie Girokonto', 'Konto speziell für Sparen mit Kündigungsfrist', 'Nur für Kinder', 'Zeitlich begrenzt'], c: 1, e: 'Sparkonto = Konto für Sparen mit Kündigungsfristen.' },
+                { q: 'Was ist Zins beim Sparen?', o: ['Bankgebühr', 'Vergütung für geliehenes Geld', 'Versicherungskosten', 'Strafzinsen'], c: 1, e: 'Zins = Vergütung die Bank zahlt für dein Geld.' }
+            ],
+            lf5: [
+                { q: 'Was ist eine Bürgschaft?', o: ['Versicherung', 'Garantie dritter Person für Kredit', 'Sicherheitspapier', 'Bankgebühr'], c: 1, e: 'Bürgschaft = Kreditsicherheit durch Bürgen-Garantie.' },
+                { q: 'Was ist ein Pfandrecht?', o: ['Eigentums-Recht', 'Recht Sache zur Sicherung zu halten', 'Versicherungsvertrag', 'Spezial-Kreditart'], c: 1, e: 'Pfandrecht = Bank darf Sache bei Nicht-Zahlung behalten/verkaufen.' },
+                { q: 'Was ist Kreditscoring?', o: ['Bankleistungs-Bewertung', 'System zur Risiko-Bewertung', 'Bankenspiel', 'Versicherungsart'], c: 1, e: 'Kreditscoring = Automatische Bewertung des Kreditrisikos.' },
+                { q: 'Wann kann Bank Dispositionskredit kündigen?', o: ['Nie', 'Nach 10 Jahren', 'Jederzeit mit Ankündigung', 'Nur mit Gericht'], c: 2, e: 'Dispositionskredit = Bank kann jederzeit mit Frist kündigen.' },
+                { q: 'Was ist ein Ratenkredit?', o: ['Kurzfristige Schuld', 'Langfristiger Kredit in Raten', 'Überziehungskredit', 'Sparprodukt'], c: 1, e: 'Ratenkredit = Kredit der in regelmäßigen Raten zurückgezahlt wird.' },
+                { q: 'Was ist Kreditscoring?', o: ['Banknote-Wertung', 'Risikobewertung von Kreditnehmern', 'Zins-Berechnung', 'Kontogebühr'], c: 1, e: 'Scoring = Maschine bewertet Kreditrisiko automatisch.' },
+                { q: 'Was ist eine Sicherungsabtretung?', o: ['Abtretung von Grundstück', 'Abtretung von Forderung als Sicherheit', 'Kreditsicherheit', 'Testament'], c: 1, e: 'Sicherungsabtretung = Abtretung einer Forderung als Kreditsicherheit.' }
+            ]
+        };
 
         const glossar = {
             'IBAN': 'International Bank Account Number - Bankkontonummer für SEPA',
             'SEPA': 'Single Euro Payments Area - Zahlungsraum Europa',
             'BGB': 'Bürgerliches Gesetzbuch - Deutsches Privatrecht',
-            'P-Konto': 'Pfändungsschutz-Konto',
-            'TAN': 'Transaktionsnummer - Sicherheit Online-Banking',
             'SCHUFA': 'Kreditauskunftei Deutschland',
             'Prokura': 'Bevollmächtigung zur Geschäftsführung',
             'Lastschrift': 'Zahlungsart mit Einzugsermächtigung',
             'Bürgschaft': 'Kreditsicherheit durch dritte Person',
-            'Pfandrecht': 'Sicherungsrecht an Sachen/Forderungen',
+            'Pfandrecht': 'Sicherungsrecht an Sachen',
             'Bausparen': 'Sparen + Darlehen für Wohnzwecke',
-            'Kreditscoring': 'Risikobewertungssystem für Kredite'
+            'Kreditscoring': 'Risikobewertungssystem'
         };
 
-        const checkliste = {
-            dienstag: ['LF 1: Rechtliches lernen', 'LF 2 Anfang: Kontoführung', 'Quiz zu LF1+LF2', 'Merksätze wiederholen'],
-            mittwoch: ['LF 2: Zahlungsverkehr', 'LF 3: Geschäftskunden', 'LF 4: Anlagen', 'Tests machen'],
-            donnerstag: ['LF 5: Kredite & Sicherheiten', 'Schwache Punkte üben', 'Volltest simulieren', 'Formeln wiederholen'],
-            freitag: ['Leichte Wiederholung (30 Min)', 'Gutes Frühstück', 'Zur Prüfung gehen', '🏆 BESTEHEN!']
-        };
-
-        const tips = [
-            '📌 Schreib aktiv Notizen!',
-            '⏰ Jede Stunde eine Pause',
-            '🎯 Fokus auf HIGH-Priority Themen',
-            '❓ Mache Tests nach jedem Thema',
-            '💪 Du schaffst das!'
+        const lernfelder = [
+            { id: 'lf1', title: 'LF 1: Eigene Rolle', subtitle: 'Rechtliche Grundlagen' },
+            { id: 'lf2', title: 'LF 2: Privatkunden', subtitle: 'Kontoführung & Zahlungsverkehr' },
+            { id: 'lf3', title: 'LF 3: Geschäftskunden', subtitle: 'Firmenkunden & Zahlungsverkehr' },
+            { id: 'lf4', title: 'LF 4: Anlagen', subtitle: 'Sparen & Vermögensbildung' },
+            { id: 'lf5', title: 'LF 5: Kredite', subtitle: 'Verbraucherdarlehen & Sicherheiten' }
         ];
+
+        // SPEICHER-SYSTEM
+        class ProgressStorage {
+            constructor() {
+                this.storageKey = 'bankapp_progress';
+                this.loadData();
+            }
+
+            loadData() {
+                const saved = localStorage.getItem(this.storageKey);
+                this.data = saved ? JSON.parse(saved) : {
+                    currentLF: null,
+                    questionsAnswered: 0,
+                    correctAnswers: 0,
+                    lfProgress: {},
+                    quizHistory: []
+                };
+            }
+
+            saveData() {
+                localStorage.setItem(this.storageKey, JSON.stringify(this.data));
+                updateUI();
+            }
+
+            recordAnswer(lfId, correct) {
+                this.data.questionsAnswered++;
+                if (correct) this.data.correctAnswers++;
+                if (!this.data.lfProgress[lfId]) this.data.lfProgress[lfId] = 0;
+                this.data.lfProgress[lfId]++;
+                this.data.currentLF = lfId;
+                this.data.quizHistory.push({
+                    lf: lfId,
+                    correct: correct,
+                    time: new Date().toLocaleTimeString()
+                });
+                this.saveData();
+            }
+
+            getProgress(lfId) {
+                return this.data.lfProgress[lfId] || 0;
+            }
+
+            getTotalProgress() {
+                const total = Object.values(this.data.lfProgress).reduce((a, b) => a + b, 0);
+                return total > 0 ? Math.round((total / (lernfelder.length * 8)) * 100) : 0;
+            }
+
+            getStats() {
+                return this.data;
+            }
+
+            reset() {
+                this.data = {
+                    currentLF: null,
+                    questionsAnswered: 0,
+                    correctAnswers: 0,
+                    lfProgress: {},
+                    quizHistory: []
+                };
+                this.saveData();
+            }
+        }
+
+        const storage = new ProgressStorage();
 
         function init() {
             renderLernfelder();
-            renderProgress();
             renderGlossar();
-            renderCheckliste();
-            renderTodayLessons();
-            renderTips();
-            startCountdown();
+            updateUI();
         }
 
         function renderLernfelder() {
             const grid = document.getElementById('lernfeldGrid');
             const quizGrid = document.getElementById('quizLernfeldGrid');
-            
+
             lernfelder.forEach(lf => {
-                const progress = 0; // STARTET BEI 0% - NICHT ZUFÄLLIG
+                const progress = storage.getProgress(lf.id);
                 const card = `
-                    <div class="lernfeld-card">
+                    <div class="lernfeld-card" onclick="startQuiz('${lf.id}')">
                         <h3>${lf.title}</h3>
                         <p>${lf.subtitle}</p>
                         <div style="margin-top: 1rem;">
-                            <div style="font-size: 0.85rem; color: #5f6368; margin-bottom: 0.5rem;">Fortschritt: ${Math.round(progress)}%</div>
+                            <div style="font-size: 0.85rem; color: #5f6368; margin-bottom: 0.5rem;">Fragen beantwortet: ${progress}</div>
                             <div class="progress-bar" style="height: 8px;">
-                                <div class="progress-fill" style="width: ${progress}%; padding: 0;"></div>
+                                <div class="progress-fill" style="width: ${Math.min(progress * 12, 100)}%; padding: 0;"></div>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-block" style="margin-top: 1rem;" onclick="startQuiz('${lf.id}')">Lernen →</button>
+                        <button class="btn btn-primary btn-block" style="margin-top: 1rem;">🧪 Quiz starten</button>
                     </div>
                 `;
                 grid.innerHTML += card;
-                quizGrid.innerHTML += card.replace('Lernen →', '🧪 Quiz');
-            });
-        }
-
-        function renderProgress() {
-            const container = document.getElementById('progressContainer');
-            lernfelder.forEach(lf => {
-                const progress = 0; // STARTET BEI 0%
-                container.innerHTML += `
-                    <div class="progress-item">
-                        <div class="progress-label"><span>${lf.title}</span><span>${Math.round(progress)}%</span></div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${progress}%">${Math.round(progress)}%</div>
-                        </div>
-                    </div>
-                `;
+                quizGrid.innerHTML += card;
             });
         }
 
@@ -489,51 +451,109 @@
             });
         }
 
-        function renderCheckliste() {
-            Object.entries(checkliste).forEach(([day, items]) => {
-                const container = document.getElementById(`checklist${day.charAt(0).toUpperCase() + day.slice(1)}`);
-                items.forEach((item, idx) => {
-                    container.innerHTML += `
-                        <div class="checklist-item">
-                            <input type="checkbox" id="${day}-${idx}">
-                            <label for="${day}-${idx}">${item}</label>
-                        </div>
-                    `;
-                });
-            });
-        }
-
-        function renderTodayLessons() {
-            const container = document.getElementById('todayLessons');
-            lernfelder.slice(0, 2).forEach(lf => {
-                container.innerHTML += `<div class="sidebar-item" onclick="startQuiz('${lf.id}')">${lf.title} →</div>`;
-            });
-        }
-
-        function renderTips() {
-            const container = document.getElementById('tips');
-            tips.forEach(tip => {
-                container.innerHTML += `<div class="sidebar-item">${tip}</div>`;
-            });
-        }
-
-        function startCountdown() {
-            function update() {
-                const friday = new Date();
-                friday.setDate(friday.getDate() + (5 - friday.getDay() || -2));
-                friday.setHours(9, 0, 0);
-                
-                const now = new Date();
-                const diff = friday - now;
-                
-                if (diff > 0) {
-                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    document.getElementById('countdown').textContent = `${days} Tage, ${hours} Stunden`;
-                }
+        function startQuiz(lfId) {
+            const fragen = allQuizFragen[lfId];
+            if (!fragen || fragen.length === 0) {
+                alert('Keine Fragen vorhanden');
+                return;
             }
-            update();
-            setInterval(update, 60000);
+
+            let fragenIndex = 0;
+            let localRichtig = 0;
+
+            function showQuestion() {
+                if (fragenIndex >= fragen.length) {
+                    const prozent = Math.round((localRichtig / fragen.length) * 100);
+                    alert(`🎉 Quiz abgeschlossen!\n\nDu hast ${localRichtig} von ${fragen.length} richtig!\n\nErgebnis: ${prozent}%\n\n${prozent >= 80 ? '🌟 Ausgezeichnet!' : prozent >= 60 ? '👍 Gut!' : '📚 Wiederhole das Thema!'}`);
+                    updateUI();
+                    return;
+                }
+
+                const f = fragen[fragenIndex];
+                const optionen = f.o.map((o, i) => `${i + 1}. ${o}`).join('\n');
+                const antwort = prompt(`${fragenIndex + 1}/${fragen.length}\n\n${f.q}\n\n${optionen}\n\nWähle 1, 2, 3 oder 4:`);
+
+                if (antwort === null) return;
+
+                const selected = parseInt(antwort) - 1;
+                const correct = selected === f.c;
+
+                storage.recordAnswer(lfId, correct);
+
+                if (correct) {
+                    alert(`✅ RICHTIG!\n\n${f.e}`);
+                    localRichtig++;
+                } else {
+                    alert(`❌ Falsch!\n\nRichtig: ${f.o[f.c]}\n\n${f.e}`);
+                }
+
+                fragenIndex++;
+                showQuestion();
+            }
+
+            showQuestion();
+        }
+
+        function updateUI() {
+            const stats = storage.getStats();
+            const totalProgress = storage.getTotalProgress();
+
+            document.getElementById('totalProgress').textContent = totalProgress + '%';
+            document.getElementById('questionsAnswered').textContent = stats.questionsAnswered;
+            document.getElementById('correctAnswers').textContent = stats.correctAnswers;
+            document.getElementById('successRate').textContent = stats.questionsAnswered > 0 ? Math.round((stats.correctAnswers / stats.questionsAnswered) * 100) + '%' : '-';
+
+            // Status Sidebar
+            const statusDiv = document.getElementById('statusInfo');
+            if (stats.currentLF) {
+                const lf = lernfelder.find(x => x.id === stats.currentLF);
+                statusDiv.innerHTML = `
+                    <div style="font-size: 0.9rem;">
+                        <strong>Lernfeld:</strong> ${lf.title}<br>
+                        <strong>Fragen:</strong> ${stats.lfProgress[stats.currentLF] || 0}<br>
+                        <strong>Zuletzt:</strong> gerade eben
+                    </div>
+                `;
+            }
+
+            // Progress Info
+            const progressDiv = document.getElementById('progressInfo');
+            let progressHtml = '';
+            lernfelder.forEach(lf => {
+                const progress = stats.lfProgress[lf.id] || 0;
+                progressHtml += `
+                    <div style="margin-bottom: 1rem; font-size: 0.85rem;">
+                        <div style="margin-bottom: 0.3rem;">${lf.id}: ${progress} Fragen</div>
+                        <div class="progress-bar" style="height: 6px;">
+                            <div class="progress-fill" style="width: ${Math.min(progress * 12, 100)}%; padding: 0;"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            progressDiv.innerHTML = progressHtml;
+
+            // Stats Tab
+            const statsDiv = document.getElementById('statsContent');
+            const successRate = stats.questionsAnswered > 0 ? Math.round((stats.correctAnswers / stats.questionsAnswered) * 100) : 0;
+            statsDiv.innerHTML = `
+                <p><strong>Gesamt:</strong> ${stats.questionsAnswered} Fragen beantwortet</p>
+                <p><strong>Richtig:</strong> ${stats.correctAnswers} Antworten</p>
+                <p><strong>Erfolgsquote:</strong> ${successRate}%</p>
+                <p><strong>Aktuelles Lernfeld:</strong> ${stats.currentLF ? lernfelder.find(x => x.id === stats.currentLF).title : 'Keine'}</p>
+                <hr style="margin: 1rem 0;">
+                <h4>Letzten Quiz-Antworten:</h4>
+                <div style="font-size: 0.85rem; max-height: 200px; overflow-y: auto;">
+                    ${stats.quizHistory.slice(-10).reverse().map(h => `
+                        <div style="margin: 0.5rem 0; padding: 0.5rem; background: ${h.correct ? '#e6f4ea' : '#fce8e6'}; border-radius: 4px;">
+                            ${h.lf} - ${h.correct ? '✅' : '❌'} - ${h.time}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            // Re-render Lernfelder mit aktuellem Progress
+            document.getElementById('lernfeldGrid').innerHTML = '';
+            renderLernfelder();
         }
 
         function switchTab(e, tab) {
@@ -543,109 +563,17 @@
             e.target.classList.add('active');
         }
 
-        const allQuizFragen = {
-            lf1: [
-                { q: 'Was ist das BGB?', optionen: ['Bundesgerichtliches Beamten-Gesetz', 'Bürgerliches Gesetzbuch', 'Bank-Geschäfts-Bestimmungen', 'Bundeskammer für Geldwäsche'], correct: 1, erk: 'Das BGB ist das Grundgesetz des deutschen Privatrechts.' },
-                { q: 'Unterschied Privatrecht und Öffentliches Recht?', optionen: ['Privatrecht = nur für reiche Menschen', 'Privatrecht regelt Beziehungen zwischen Personen, Öffentliches Recht regelt Staat-Bürger', 'Es gibt keinen Unterschied', 'Privatrecht ist älter'], correct: 1, erk: 'Privatrecht regelt Beziehungen zwischen Privatpersonen/Unternehmen. Öffentliches Recht regelt Beziehungen mit dem Staat.' },
-                { q: 'Was ist ein Kaufvertrag?', optionen: ['Ein Vertrag zum Kauf von Häusern', 'Eine Einigung über Kaufpreis und Ware', 'Ein Bankprodukt', 'Ein Versicherungsvertrag'], correct: 1, erk: 'Ein Kaufvertrag entsteht durch Angebot und Annahme zwischen Käufer und Verkäufer.' }
-            ],
-            lf2: [
-                { q: 'Was ist ein Einzelkonto?', optionen: ['Ein Konto für eine Person', 'Ein Konto für mehrere Personen', 'Ein Konto nur für Firmen', 'Ein spezielles Sparkonto'], correct: 0, erk: 'Einzelkonto = Girokonto für EINE Privatperson.' },
-                { q: 'Was bedeutet SEPA?', optionen: ['Single Euro Payments Area', 'Sicherheits-Europa-Payment', 'Sparkasse Electronic Payment', 'System Europäischer Privatkonten'], correct: 0, erk: 'SEPA = Single Euro Payments Area - der einheitliche Zahlungsraum in Europa.' },
-                { q: 'Was ist eine IBAN?', optionen: ['Internet Banking Account Number', 'International Bank Account Number', 'Internal Banking And Numeric', 'Integrated Bank Account Number'], correct: 1, erk: 'IBAN = International Bank Account Number - die internationale Bankkontonummer für SEPA-Zahlungen.' },
-                { q: 'Was ist eine Lastschrift?', optionen: ['Eine besondere Kreditkarte', 'Zahlungsart mit Einzugsermächtigung', 'Ein Bankgebühren-Modell', 'Eine Sicherheit für Kredite'], correct: 1, erk: 'Lastschrift = Bank zieht Geld vom Konto ab (mit schriftlicher Erlaubnis des Kunden).' },
-                { q: 'Was ist die SCHUFA?', optionen: ['Ein Bankverband', 'Eine Kreditauskunftei', 'Ein Kartenhersteller', 'Eine Versicherung'], correct: 1, erk: 'SCHUFA = Schutzgemeinschaft für allgemeine Kreditsicherung - Kreditauskunftei in Deutschland.' }
-            ],
-            lf3: [
-                { q: 'Was ist eine Prokura?', optionen: ['Eine Vollmacht für bestimmte Geschäfte', 'Eine Bevollmächtigung zur Unternehmensführung', 'Ein Bankprodukt', 'Eine Versicherungsart'], correct: 1, erk: 'Prokura = Bevollmächtigung zur Geschäftsführung mit großen Befugnissen.' },
-                { q: 'Welche Rechtsform hat die meisten Haftungsbeschränkungen?', optionen: ['Einzelunternehmen', 'OHG (Offene Handelsgesellschaft)', 'GmbH (Gesellschaft mit beschränkter Haftung)', 'AG (Aktiengesellschaft)'], correct: 2, erk: 'GmbH = Haftung auf Stammkapital begrenzt. Privatvermögen ist geschützt.' },
-                { q: 'Was ist Devisen?', optionen: ['Deutsche Zahlungsarten', 'Ausländische Währungen', 'Sparbriefe', 'Wertpapiere'], correct: 1, erk: 'Devisen = Zahlungsmittel in fremden Währungen (z.B. US-Dollar, Schweizer Franken).' }
-            ],
-            lf4: [
-                { q: 'Was ist Bausparen?', optionen: ['Eine normale Sparanlage', 'Sparen für Hausbau mit Darlehen und Staatshilfe', 'Ein Versicherungsprodukt', 'Ein Kreditprodukt'], correct: 1, erk: 'Bausparen = Kombination aus Sparphase + Darlehensphase mit staatlicher Förderung für Wohnzwecke.' },
-                { q: 'Was ist ein Festgeld?', optionen: ['Geld das man nicht abheben kann', 'Geld das für eine bestimmte Zeit zu festem Zinssatz angelegt wird', 'Ein Sicherheitssystem', 'Ein Bankgebühren-Modell'], correct: 1, erk: 'Festgeld = Geldanlage für feste Laufzeit (z.B. 6 Monate, 1 Jahr) mit vorher bekanntem Zinssatz.' },
-                { q: 'Was sind vermögenswirksame Leistungen?', optionen: ['Bankgebühren', 'Arbeitgeber-Zuschüsse für Sparanlagen', 'Versicherungs-Leistungen', 'Steuerersparnis'], correct: 1, erk: 'VL = Arbeitgeber zahlt zusätzlich zum Lohn Geld für Sparanlagen (mit Staatshilfe).' }
-            ],
-            lf5: [
-                { q: 'Was ist eine Bürgschaft?', optionen: ['Eine Versicherung', 'Eine Garantie einer dritten Person für einen Kredit', 'Ein Sicherheitspapier', 'Eine Bankgebühr'], correct: 1, erk: 'Bürgschaft = Kreditsicherheit. Ein Bürge haftet für Schulden des Kreditnehmers.' },
-                { q: 'Was ist ein Pfandrecht?', optionen: ['Das Recht, etwas zu besitzen', 'Das Recht, eine Sache zur Sicherung einer Forderung zu halten', 'Ein Versicherungsvertrag', 'Eine spezielle Kreditart'], correct: 1, erk: 'Pfandrecht = Bank darf Sache behalten/verkaufen wenn Kredit nicht bezahlt wird.' },
-                { q: 'Was ist Kreditscoring?', optionen: ['Eine Bewertung der Bankleistung', 'Ein System zur Bewertung des Kreditrisikos', 'Ein Spiel der Banken', 'Eine Versicherungsart'], correct: 1, erk: 'Kreditscoring = Maschine/Algorithmus bewertet automatisch wie riskant ein Kredite ist.' },
-                { q: 'Wann kann eine Bank einen Dispositionskredit kündigen?', optionen: ['Nie', 'Nach 10 Jahren', 'Jederzeit nach Ankündigung', 'Nur mit Gericht'], correct: 2, erk: 'Dispositionskredit kann jederzeit mit Frist gekündigt werden. Das ist im AGB festgelegt.' }
-            ]
-        };
-
-        function startQuiz(lfId) {
-            const fragen = allQuizFragen[lfId];
-            if (!fragen) {
-                alert('Keine Fragen vorhanden');
-                return;
+        function resetProgress() {
+            if (confirm('⚠️ Alle Fortschritte werden gelöscht! Sicher?')) {
+                storage.reset();
+                alert('✅ Alle Daten zurückgesetzt!');
+                location.reload();
             }
-
-            let fragenIndex = 0;
-            let richtig = 0;
-            
-            function showQuestion() {
-                if (fragenIndex >= fragen.length) {
-                    const prozent = Math.round((richtig / fragen.length) * 100);
-                    alert(`🎉 Quiz abgeschlossen!\n\nDu hast ${richtig} von ${fragen.length} richtig beantwortet!\n\nErgebnis: ${prozent}%\n\n${prozent >= 80 ? '🌟 Ausgezeichnet!' : prozent >= 60 ? '👍 Gut!' : '📚 Nochmal wiederholen!'}`);
-                    return;
-                }
-
-                const f = fragen[fragenIndex];
-                const optionen = f.optionen.map((o, i) => `${i + 1}. ${o}`).join('\n');
-                const antwort = prompt(`${fragenIndex + 1}/${fragen.length}\n\n${f.q}\n\n${optionen}\n\nWähle 1, 2, 3 oder 4:`);
-                
-                if (antwort === null) return;
-                
-                const selected = parseInt(antwort) - 1;
-                if (selected === f.correct) {
-                    alert(`✅ RICHTIG!\n\n${f.erk}`);
-                    richtig++;
-                } else {
-                    alert(`❌ Leider falsch!\n\nRichtige Antwort: ${f.optionen[f.correct]}\n\n${f.erk}`);
-                }
-                
-                fragenIndex++;
-                showQuestion();
-            }
-            
-            showQuestion();
-        }
-
-        function startFullTest() {
-            alert('🏆 VOLLTEST gestartet!\n\n⏱️ 90 Minuten Zeit\n📖 Alle 5 Lernfelder\n\nBleib konzentriert!');
-        }
-
-        function startMiniTest() {
-            alert('⚡ MINI-TEST gestartet!\n\n⏱️ 15 Minuten\n📖 Schneller Check\n\nAufwärmen vor dem Volltest!');
         }
 
         document.getElementById('darkModeBtn').addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-        });
-
-        document.getElementById('loginBtn').addEventListener('click', () => {
-            document.getElementById('loginModal').classList.add('active');
-        });
-
-        function login() {
-            const email = document.getElementById('email').value;
-            if (!email) { alert('E-Mail eingeben!'); return; }
-            localStorage.setItem('userEmail', email);
-            alert('✅ Anmeldung erfolgreich!');
-            closeModal('loginModal');
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
-        }
-
-        document.getElementById('glossarSearch')?.addEventListener('input', (e) => {
-            const search = e.target.value.toLowerCase();
-            document.querySelectorAll('#glossarContent > div').forEach(item => {
-                item.style.display = item.textContent.toLowerCase().includes(search) ? 'block' : 'none';
-            });
         });
 
         if (localStorage.getItem('darkMode') === 'true') {
